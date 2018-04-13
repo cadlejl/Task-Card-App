@@ -21,6 +21,7 @@ var WeatherComponent = (function () {
         this.tempUnitSymbol = "F";
         this.currentCity = "";
         this.currentState = "";
+        this.currentDate = "";
         this.icons = new Skycons();
         this.dataReceived = false;
     }
@@ -47,6 +48,7 @@ var WeatherComponent = (function () {
                 _this.weatherData.icon = weather["currently"]["icon"];
             console.log("Weather: ", _this.weatherData); //TODO: REMOVE
             _this.setIcon();
+            _this.getDateTime();
             _this.dataReceived = true;
         }, function (err) { return console.error(err); });
     };
@@ -95,6 +97,20 @@ var WeatherComponent = (function () {
             this.icons.color = constants_1.WEATHER_COLORS["default"]["color"];
             return constants_1.WEATHER_COLORS["default"];
         }
+    };
+    WeatherComponent.prototype.refresh = function () {
+        this.dataReceived = false;
+        this.ngOnInit();
+    };
+    WeatherComponent.prototype.getDateTime = function () {
+        var now = new Date();
+        var options = {
+            // month: 'short',
+            // day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        this.currentDate = "@ " + now.toLocaleString('en-us', options);
     };
     WeatherComponent = __decorate([
         // No TypaScript definition file for Skycons

@@ -20,6 +20,7 @@ export class WeatherComponent implements OnInit {
     tempUnitSymbol = "F";
     currentCity = "";
     currentState = "";
+    currentDate = "";
     icons = new Skycons();
     dataReceived = false;
 
@@ -51,6 +52,7 @@ export class WeatherComponent implements OnInit {
                 this.weatherData.icon = weather ["currently"]["icon"]
                 console.log("Weather: ", this.weatherData); //TODO: REMOVE
                 this.setIcon();
+                this.getDateTime();
                 this.dataReceived = true;
             },
             err => console.error(err));
@@ -102,5 +104,21 @@ export class WeatherComponent implements OnInit {
             this.icons.color = WEATHER_COLORS["default"]["color"];
             return WEATHER_COLORS["default"];
         }
+    }
+
+    refresh() {
+        this.dataReceived = false;
+        this.ngOnInit();
+    }
+
+    getDateTime() {
+        let now = new Date();
+        let options = {  
+            // month: 'short',
+            // day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        this.currentDate = "@ " + now.toLocaleString('en-us', options);
     }
  }
