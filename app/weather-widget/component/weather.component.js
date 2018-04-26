@@ -48,7 +48,7 @@ var WeatherComponent = (function () {
                 _this.weatherData.icon = weather["currently"]["icon"];
             console.log("Weather: ", _this.weatherData); //TODO: REMOVE
             _this.setIcon();
-            _this.getDateTime();
+            _this.getNewTime();
             _this.dataReceived = true;
         }, function (err) { return console.error(err); });
     };
@@ -102,9 +102,11 @@ var WeatherComponent = (function () {
         this.dataReceived = false;
         this.ngOnInit();
     };
-    WeatherComponent.prototype.getDateTime = function () {
+    WeatherComponent.prototype.getNewTime = function () {
         var now = new Date();
         var options = {
+            // weekday: 'long',
+            // year: 'numeric', 
             // month: 'short',
             // day: 'numeric',
             hour: '2-digit',

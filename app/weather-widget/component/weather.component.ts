@@ -52,7 +52,7 @@ export class WeatherComponent implements OnInit {
                 this.weatherData.icon = weather ["currently"]["icon"]
                 console.log("Weather: ", this.weatherData); //TODO: REMOVE
                 this.setIcon();
-                this.getDateTime();
+                this.getNewTime();
                 this.dataReceived = true;
             },
             err => console.error(err));
@@ -111,9 +111,11 @@ export class WeatherComponent implements OnInit {
         this.ngOnInit();
     }
 
-    getDateTime() {
+    getNewTime() {
         let now = new Date();
-        let options = {  
+        let options = {
+            // weekday: 'long',
+            // year: 'numeric', 
             // month: 'short',
             // day: 'numeric',
             hour: '2-digit',
